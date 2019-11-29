@@ -40,60 +40,24 @@ class GenerateComputersRepository
 
     private $onePart;
 
-
     /**
+     * @param string $part
+     * @param string|null $brand
+     * @param string $operator
      * @return array
      */
-    public function getAllIntelCPU(): array
+    public function getPartData(string $part, ?string $brand = null, ?string $operator = '='): array
     {
-        $this->intelCPUList = DB::table('hardwares')
-            ->where('part', '=', 'CPU')
-            ->where('brand', '=', 'Intel')->get()->toArray();
-        return $this->intelCPUList;
-    }
+        $query = DB::table('hardwares')
+            ->select(['id', 'score'])
+            //->selectRaw('score * (random() / 5 + 0.9) as new_score')
+            ->where('part', '=', $part);
+        if ($brand) {
+            $query->where('brand', $operator, $brand);
+        }
 
-    /**
-     * @return array
-     */
-    public function getAllAmdCPU(): array
-    {
-        $this->amdCPUList = DB::table('hardwares')
-            ->where('part', '=', 'CPU')
-            ->where('brand', '=', 'AMD')->get()->toArray();
-        return $this->amdCPUList;
-
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllIntelCompatibleGPU(): array
-    {
-        $this->intelCompatibleGPUList = DB::table('hardwares')
-            ->where('part', '=', 'GPU')
-            ->where('brand', '!=', 'Intel')->get()->toArray();
-        return $this->intelCompatibleGPUList;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllAmdCompatibleGPU(): array
-    {
-        $this->amdCompatibleGPUList = DB::table('hardwares')
-            ->where('part', '=', 'GPU')
-            ->where('brand', '!=', 'AMD')->get()->toArray();
-        return $this->amdCompatibleGPUList;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllRam(): array
-    {
-        $this->ramList = DB::table('hardwares')
-            ->where('part', '=', 'RAM')->get()->toArray();
-        return $this->ramList;
+        $result = $query->get()->toArray();
+        return $result;
     }
 
     /**
@@ -103,6 +67,8 @@ class GenerateComputersRepository
     {
         $randomMaxStorageQuantity = rand(1, 5);
         $this->randomStorageList = DB::table('hardwares')
+            ->select(['id'])
+            ->selectRaw('score * (random() / 5 + 0.9) as new_score')
             ->where('part', '=', 'SSD')
             ->orWhere('part', '=', 'HDD')
             ->inRandomOrder()->limit($randomMaxStorageQuantity)
@@ -121,4 +87,17 @@ class GenerateComputersRepository
         return $this->onePart;
     }
 
+    public function insertGeneratedComputers(array $genCompList)
+    {
+        foreach ($genCompList as $genComp) {
+            $tempStorages = array();
+            $pcId = DB::table('computers')->insertGetId(['cpu' => $genComp['cpu'], 'gpu' => $genComp['gpu'], 'ram' => $genComp['ram'],
+                    'cpu_score' => $genComp['cpu_score'], 'gpu_score' => $genComp['gpu_score'], 'ram_score' => $genComp['ram_score']
+                ]);
+            foreach ($genComp['storages'] as $value){
+                $tempStorages[] = ['pc_id' => $pcId, 'storage_id' => $value->id, 'storage_score' => $value->new_score];
+            }
+            DB::table('storages')->insert($tempStorages);
+        }
+    }
 }

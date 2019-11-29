@@ -16,3 +16,19 @@ Route::get('/welcome', function () {
 });
 
 Route::get('/','ComputerController@index');
+Route::get('/hardware','HardwareController@index');
+
+Route::get('/hardware/cpu','HardwareController@showCPUAndAvgScoreList');
+Route::get('/hardware/cpu/chart','HardwareController@showScoreChart');
+
+Route::get('/hardware/gpu','HardwareController@showGPUAndAvgScoreList');
+Route::get('/hardware/gpu/chart','HardwareController@showScoreChart');
+
+Route::get('/hardware/ram','HardwareController@showRAMAndAvgScoreList');
+Route::get('/hardware/ram/chart','HardwareController@showScoreChart');
+
+Route::get('/hardware/ssd','HardwareController@showSSDAndAvgScoreList');
+Route::get('/hardware/ssd/chart','HardwareController@showScoreChart');
+
+Route::get('/hardware/hdd','HardwareController@showHDDAndAvgScoreList');
+Route::get('/hardware/hdd/chart','HardwareController@showScoreChart');

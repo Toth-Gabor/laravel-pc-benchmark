@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\models\computerParts;
+namespace App\Http\models\hardwares;
 
 
 class HDD extends DataStorage

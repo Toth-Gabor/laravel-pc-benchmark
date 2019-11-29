@@ -6,10 +6,12 @@
 <body>
 
 @include('includes.nav')
+@include('includes.hardwareNav')
 
-<h1>Test DB</h1>
 
-<p>{{{ $testVar }}}</p>
+<h1>Test Hardwares</h1>
+
+<p>{{{ $test }}}</p>
 
 
 </body>

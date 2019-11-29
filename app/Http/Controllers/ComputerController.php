@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\repositories\HardwaresRepository;
 use App\Http\services\GenerateComputersService;
+use App\Http\services\HardwareService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,12 +17,15 @@ class ComputerController extends Controller
      */
     public function index()
     {
+        //$hSrv = new HardwareService();
+        //$hSrv->getCpuListById(970);
         $gCR = new GenerateComputersService();
+        set_time_limit(0);
+        //$gCR->createDBInsert(39,25000);
 
-        $testVar = $gCR->generateComputer(1);
+        $testVar = 'From ComputerController';
 
-
-        return view('index', compact('testVar'));
+        return view('index', ['testVar' => $testVar]);
     }
 
     /**

@@ -24,29 +24,16 @@ class BenchmarkScoreCounter
         return $scoreList;
     }
 
+
+
     /**
-     * @param array $storageList
+     * @param int $hardwareId
      * @return float
      */
-    public function getFastestSSDOrHDDScore(array $storageList): float
+    public function getHardwareScore(int $hardwareId): float
     {
-        $ssdScores = array();
-        $hddScores = array();
-        foreach ($storageList as $key=>$value){
-            $storage = get_object_vars($value);
-
-            if ($storage['part'] == 'SSD'){
-                array_push($ssdScores, $storage['score']);
-            } else {
-                array_push($hddScores, $storage['score']);
-            }
-        }
-        if (!empty($ssdScores)){
-            return max($ssdScores);
-        } else {
-            return max($hddScores);
-        }
-
+        $score = 0;
+        return $score;
     }
 
 }

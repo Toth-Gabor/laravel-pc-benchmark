@@ -1,15 +1,10 @@
 <?php
 
 
-namespace App;
+namespace App\Http\models\hardwares;
 
 
-use App\Http\models\computerParts\Cpu;
-use App\Http\models\computerParts\Gpu;
-use App\Http\models\computerParts\Ram;
-use App\Http\models\computerParts\SSD;
-
-abstract class ComputerPart
+abstract class Hardware
 {
     /**
      * @var int
@@ -37,7 +32,7 @@ abstract class ComputerPart
     private $score;
 
     /**
-     * ComputerPart constructor.
+     * Hardware constructor.
      * @param int $id
      * @param string $partType
      * @param string $brand
@@ -92,6 +87,5 @@ abstract class ComputerPart
     {
         return $this->score;
     }
-
 
 }

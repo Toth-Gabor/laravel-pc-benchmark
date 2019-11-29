@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Http\models\computerParts;
+namespace App\Http\models\hardwares;
 
 
 use Exception;
 
-class ComputerPartFactory
+class HardwareFactory
 {
     /**
      * @param int $id
@@ -17,22 +17,22 @@ class ComputerPartFactory
      * @return HDD|Cpu|Gpu|Ram|SSD
      * @throws Exception
      */
-    public static function createPart(int $id, string $partType, string $brand, string $model, int $score)
+    public static function createHardware(int $id, string $partType, string $brand, string $model, int $score)
     {
         switch ($partType) {
-            case 'cpu':
+            case 'CPU':
                 return new Cpu($id, $partType, $brand, $model, $score);
                 break;
-            case 'gpu':
+            case 'GPU':
                 return new Gpu($id, $partType, $brand, $model, $score);
                 break;
-            case 'ram':
+            case 'RAM':
                 return new Ram($id, $partType, $brand, $model, $score);
                 break;
-            case 'ssd':
+            case 'SSD':
                 return new SSD($id, $partType, $brand, $model, $score);
                 break;
-            case 'hdd':
+            case 'HDD':
                 return new HDD($id, $partType, $brand, $model, $score);
                 break;
             default:
