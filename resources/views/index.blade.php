@@ -6,8 +6,9 @@
 <body>
 
 @include('includes.nav')
+@include('includes.hardwareNav')
 
-<h1>Test DB</h1>
+<h1>Computer</h1>
 
 <p>{{{ $testVar }}}</p>
 

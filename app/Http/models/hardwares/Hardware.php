@@ -88,4 +88,14 @@ abstract class Hardware
         return $this->score;
     }
 
+    /**
+     * @param int $score
+     */
+    public function setScore(int $score): void
+    {
+        $this->score = $score;
+    }
+
+
+
 }

@@ -6,7 +6,7 @@
 <body>
 
 @include('includes.nav')
-@include('includes.hardwareNav')
+@include('includes.benchmarkNav')
 
 <div class="container-fluid">
     <h1>Test SSD</h1>

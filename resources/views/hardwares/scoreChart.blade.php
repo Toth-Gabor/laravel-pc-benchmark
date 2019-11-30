@@ -6,7 +6,7 @@
     <script type="text/javascript">
         window.onload = function () {
             let scoreList = <?php echo json_encode($scoreList); ?>;
-            console.log(scoreList);
+            //console.log(scoreList);
 
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
@@ -35,12 +35,16 @@
 </head>
 <body>
 @include('includes.nav')
-@include('includes.hardwareNav')
+@include('includes.benchmarkNav')
 
 <div class="container-fluid">
     <h1>{{{ $hardware->getPartType() . '  Chart'}}}</h1>
     <h3>{{{ $hardware->getbrand() . ' ' . $hardware->getModel() }}}</h3>
+    <h3>{{{ 'This ' . $hardware->getPartType() . ' average score is: ' . $avg_score }}}</h3>
     <h3>{{{  "It's installed in " . $computerFittedWith . ' computers!' }}}</h3>
+    <div>
+        <a href="{{{ action('HardwareController@index', ['id' => $hardware->getId(), 'avg_score' => $avg_score]) }}}" class="btn-info btn">Add to your Computer</a>
+    </div>
 
 
     <div id="chartContainer" style="width: 100%;"></div>

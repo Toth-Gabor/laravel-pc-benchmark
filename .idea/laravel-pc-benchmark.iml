@@ -94,5 +94,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="canvasjs" level="application" />
+    <orderEntry type="library" name="bootstrap3-typeahead" level="application" />
   </component>
 </module>

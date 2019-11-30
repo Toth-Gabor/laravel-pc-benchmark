@@ -6,7 +6,7 @@
 <body>
 
 @include('includes.nav')
-@include('includes.hardwareNav')
+@include('includes.benchmarkNav')
 
 <div class="container-fluid">
     <h1>Test CPU</h1>
@@ -24,7 +24,7 @@
                     <td>{{{ $cpu->cpu_id }}}</td>
                     <td>{{{ $cpu->model }}}</td>
                     <td>{{{ round($cpu->avg_score, 2) }}}</td>
-                    <td><a href="{{{ action('HardwareController@showScoreChart', ['id' => $cpu->cpu_id]) }}}"
+                    <td><a href="{{{ action('HardwareController@showScoreChart', ['id' => $cpu->cpu_id, 'avg_score' => round($cpu->avg_score, 2)]) }}}"
                            class="btn btn-info">Select</a></td>
                 </tr>
             @endforeach

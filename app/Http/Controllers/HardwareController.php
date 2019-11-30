@@ -33,7 +33,7 @@ class HardwareController extends Controller
         $test = 'From hardware';
 
 
-        return view('hardwares.index', compact('test'));
+        return view('hardwares.index', ['test' => $test]);
     }
 
     public function showCPUAndAvgScoreList()
@@ -72,6 +72,12 @@ class HardwareController extends Controller
         return view('hardwares.hdd', ['hddAndAvgScoreList' => $hddAndAvgScoreList]);
     }
 
+    public function showCPUList()
+    {
+        $cpuList = $this->hardwareSrv;
+        return view('index', ['hddAndAvgScoreList' => $hddAndAvgScoreList]);
+    }
+
     /**
      * @return Factory|View
      */
@@ -80,6 +86,7 @@ class HardwareController extends Controller
         $arr = [];
         $scoreList = [];
         $id = request('id');
+        $avg_score = request('avg_score');
         $hardware = $this->hardwareSrv->getHardwareById($id);
         $tempScoreList = $this->hardwareSrv->getHardwareListById($id);
         $computerFittedWith = sizeof($tempScoreList);
@@ -112,7 +119,7 @@ class HardwareController extends Controller
             }
         }
         return view('hardwares.scoreChart', ['scoreList' => $scoreList, 'hardware' => $hardware,
-            'computerFittedWith' => $computerFittedWith]);
+            'computerFittedWith' => $computerFittedWith, 'avg_score' => $avg_score]);
     }
 
 

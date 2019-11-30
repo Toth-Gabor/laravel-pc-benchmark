@@ -14,8 +14,10 @@
 Route::get('/welcome', function () {
     return view('welcome');
 });
+Route::get('autocomplete', 'AutoCompleteController@liveSearch');
 
 Route::get('/','ComputerController@index');
+Route::get('/show','ComputerController@show');
 Route::get('/hardware','HardwareController@index');
 
 Route::get('/hardware/cpu','HardwareController@showCPUAndAvgScoreList');

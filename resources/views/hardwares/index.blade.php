@@ -4,12 +4,13 @@
 @include('includes.head')
 
 <body>
-
 @include('includes.nav')
+@include('includes.benchmarkNav')
 @include('includes.hardwareNav')
 
 
-<h1>Test Hardwares</h1>
+
+<h1>Hardware</h1>
 
 <p>{{{ $test }}}</p>
 

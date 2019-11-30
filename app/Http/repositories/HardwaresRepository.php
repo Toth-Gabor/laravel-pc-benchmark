@@ -4,10 +4,15 @@
 namespace App\Http\repositories;
 
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class HardwaresRepository
 {
+    const LIMIT = 10;
+
     /**
      * @return array
      */
@@ -157,5 +162,25 @@ class HardwaresRepository
                 WHERE id = ?;', [$id]);
         return $hardware;
     }
+
+    public function getCpuList()
+    {
+
+    }
+
+    /**
+     * @param string $term
+     * @return Collection
+     */
+    public function search(string $term)
+    {
+        return DB::table('hardwares')
+            ->where("model", "LIKE", "%$term%")
+            ->orWhere('brand', "LIKE", "%$term%")
+            ->orWhere('part', "LIKE", "%$term%")
+            ->limit(self::LIMIT)
+            ->get();
+    }
+
 
 }

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\repositories\HardwaresRepository;
-use App\Http\services\GenerateComputersService;
 use App\Http\services\HardwareService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,14 +15,30 @@ class ComputerController extends Controller
      */
     public function index()
     {
-        //$hSrv = new HardwareService();
-        //$hSrv->getCpuListById(970);
-        $gCR = new GenerateComputersService();
-        set_time_limit(0);
-        //$gCR->createDBInsert(39,25000);
+        $hwRepo = new HardwareService();
+        $id = (request('id')) ? request('id') : 2;
+        $computer = isset($_SESSION['computer']) ? $_SESSION['computer'] : $_SESSION['computer'] = [];
+        $hardware = $hwRepo->getHardwareById($id);
+        $avg_score = request('avg_score');
+        $hardware->setScore($avg_score);
+        switch ($hardware->getPartType()) {
+            case 'CPU':
+                $computer['cpu'] = $hardware;
+                break;
+            case 'GPU':
+                $computer['gpu'] = $hardware;
+                break;
+            case 'RAM':
+                $computer['ram'] = $hardware;
+                break;
+            case 'HDD':
+            case 'SDD':
+                $computer['storages'] = $hardware;
+                break;
+        }
 
-        $testVar = 'From ComputerController';
 
+        $testVar = 'From ComputerController index';
         return view('index', ['testVar' => $testVar]);
     }
 
@@ -52,18 +66,18 @@ class ComputerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $testVar = 'From ComputerController show';
+        return view('index', ['testVar' => $testVar]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function edit($id)
@@ -75,7 +89,7 @@ class ComputerController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -86,7 +100,7 @@ class ComputerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function destroy($id)
