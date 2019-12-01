@@ -17,15 +17,21 @@
                 <th>Id</th>
                 <th>CPU Model</th>
                 <th>Average Score</th>
-                <th>Action</th>
+                <th>Actions</th>
             </tr>
             @foreach($cpuAndAvgScoreList as $cpu)
                 <tr>
                     <td>{{{ $cpu->cpu_id }}}</td>
                     <td>{{{ $cpu->model }}}</td>
                     <td>{{{ round($cpu->avg_score, 2) }}}</td>
-                    <td><a href="{{{ action('HardwareController@showScoreChart', ['id' => $cpu->cpu_id, 'avg_score' => round($cpu->avg_score, 2)]) }}}"
-                           class="btn btn-info">Select</a></td>
+                    <td>
+                        <a href="{{{ action('HardwareController@showScoreChart',
+                            ['id' => $cpu->cpu_id, 'avg_score' => round($cpu->avg_score, 2)]) }}}"
+                           class="btn btn-info">Select</a>
+                        <a href="{{{ action('ComputerController@store',
+                            ['id' => $cpu->cpu_id, 'avg_score' => round($cpu->avg_score, 2)]) }}}"
+                           class="btn-info btn">Add to your Computer</a>
+                    </td>
                 </tr>
             @endforeach
         </table>

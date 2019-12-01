@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da5d04c5-7851-4b95-8dc0-73aaec770c9d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/AutoCompleteController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/includes/benchmarkNav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/laravel-pc-benchmark.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-pc-benchmark.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ComputerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ComputerController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HardwareController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HardwareController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/models/hardwares/Hardware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/models/hardwares/Hardware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/repositories/HardwaresRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/repositories/HardwaresRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/models/Computer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/models/Computer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/models/hardwares/DataStorage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/models/hardwares/DataStorage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/services/ComputerService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/services/ComputerService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/hardwares/cpu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/hardwares/cpu.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/hardwares/gpu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/hardwares/gpu.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/hardwares/hdd.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/hardwares/hdd.blade.php" afterDir="false" />
@@ -17,8 +16,6 @@
       <change beforePath="$PROJECT_DIR$/resources/views/hardwares/ram.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/hardwares/ram.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/hardwares/scoreChart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/hardwares/scoreChart.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/hardwares/ssd.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/hardwares/ssd.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/includes/hardwareNav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/hardwareNav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/includes/head.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/head.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/includes/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/nav.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
@@ -269,7 +266,7 @@
       <workItem from="1574145189741" duration="1286000" />
       <workItem from="1574146520020" duration="79328000" />
       <workItem from="1574675049552" duration="30721000" />
-      <workItem from="1574758691306" duration="110728000" />
+      <workItem from="1574758691306" duration="135389000" />
     </task>
     <task id="LOCAL-00001" summary="Added BenchmarkScoreCounter class">
       <created>1574604924799</created>
@@ -320,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575016968962</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Started computer page, add parts to computer">
+      <created>1575099118147</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1575099118147</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,6 +352,7 @@
     <MESSAGE value="Added services classes" />
     <MESSAGE value="Added sql files" />
     <MESSAGE value="Generated computers, show average hardware score, show selected hardware chart tasks completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Generated computers, show average hardware score, show selected hardware chart tasks completed" />
+    <MESSAGE value="Started computer page, add parts to computer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Started computer page, add parts to computer" />
   </component>
 </project>

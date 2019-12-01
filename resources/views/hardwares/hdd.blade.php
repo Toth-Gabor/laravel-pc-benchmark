@@ -24,8 +24,14 @@
                     <td>{{{ $hdd->hdd_id }}}</td>
                     <td>{{{ $hdd->model }}}</td>
                     <td>{{{ round($hdd->avg_score, 2) }}}</td>
-                    <td><a href="{{{ action('HardwareController@showScoreChart', ['id' => $hdd->hdd_id]) }}}"
-                           class="btn btn-info">Select</a></td>
+                    <td>
+                        <a href="{{{ action('HardwareController@showScoreChart',
+                            ['id' => $hdd->hdd_id, 'avg_score' => round($hdd->avg_score, 2)]) }}}"
+                           class="btn btn-info">Select</a>
+                        <a href="{{{ action('ComputerController@store',
+                            ['id' => $hdd->hdd_id, 'avg_score' => round($hdd->avg_score, 2)]) }}}"
+                           class="btn-info btn">Add to your Computer</a>
+                    </td>
                 </tr>
             @endforeach
         </table>

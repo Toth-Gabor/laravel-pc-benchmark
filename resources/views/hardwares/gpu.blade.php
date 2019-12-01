@@ -24,8 +24,14 @@
                     <td>{{{ $gpu->gpu_id }}}</td>
                     <td>{{{ $gpu->model }}}</td>
                     <td>{{{ round($gpu->avg_score, 2) }}}</td>
-                    <td><a href="{{{ action('HardwareController@showScoreChart', ['id' => $gpu->gpu_id]) }}}"
-                           class="btn btn-info">Select</a></td>
+                    <td>
+                        <a href="{{{ action('HardwareController@showScoreChart',
+                            ['id' => $gpu->gpu_id, 'avg_score' => round($gpu->avg_score, 2)]) }}}"
+                           class="btn btn-info">Select</a>
+                        <a href="{{{ action('ComputerController@store',
+                            ['id' => $gpu->gpu_id, 'avg_score' => round($gpu->avg_score, 2)]) }}}"
+                           class="btn-info btn">Add to your Computer</a>
+                    </td>
                 </tr>
             @endforeach
         </table>

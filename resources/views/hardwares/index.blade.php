@@ -6,14 +6,8 @@
 <body>
 @include('includes.nav')
 @include('includes.benchmarkNav')
-@include('includes.hardwareNav')
 
-
-
-<h1>Hardware</h1>
-
-<p>{{{ $test }}}</p>
-
+<h1>Welcome page</h1>
 
 </body>
 </html>

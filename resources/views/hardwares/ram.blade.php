@@ -24,8 +24,14 @@
                     <td>{{{ $ram->ram_id }}}</td>
                     <td>{{{ $ram->model }}}</td>
                     <td>{{{ round($ram->avg_score, 2) }}}</td>
-                    <td><a href="{{{ action('HardwareController@showScoreChart', ['id' => $ram->ram_id]) }}}"
-                           class="btn btn-info">Select</a></td>
+                    <td>
+                        <a href="{{{ action('HardwareController@showScoreChart',
+                            ['id' => $ram->ram_id, 'avg_score' => round($ram->avg_score, 2)]) }}}"
+                           class="btn btn-info">Select</a>
+                        <a href="{{{ action('ComputerController@store',
+                            ['id' => $ram->ram_id, 'avg_score' => round($ram->avg_score, 2)]) }}}"
+                           class="btn-info btn">Add to your Computer</a>
+                    </td>
                 </tr>
             @endforeach
         </table>

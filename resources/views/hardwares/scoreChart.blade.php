@@ -43,7 +43,7 @@
     <h3>{{{ 'This ' . $hardware->getPartType() . ' average score is: ' . $avg_score }}}</h3>
     <h3>{{{  "It's installed in " . $computerFittedWith . ' computers!' }}}</h3>
     <div>
-        <a href="{{{ action('HardwareController@index', ['id' => $hardware->getId(), 'avg_score' => $avg_score]) }}}" class="btn-info btn">Add to your Computer</a>
+        <a href="{{{ action('ComputerController@store', ['id' => $hardware->getId(), 'avg_score' => $avg_score]) }}}" class="btn-info btn">Add to your Computer</a>
     </div>
 
 

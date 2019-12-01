@@ -25,8 +25,14 @@
                     <td>{{{ $ssd->ssd_id }}}</td>
                     <td>{{{ $ssd->model }}}</td>
                     <td>{{{ round($ssd->avg_score, 2) }}}</td>
-                    <td><a href="{{{ action('HardwareController@showScoreChart', ['id' => $ssd->ssd_id]) }}}"
-                           class="btn btn-info">Select</a></td>
+                    <td>
+                        <a href="{{{ action('HardwareController@showScoreChart',
+                            ['id' => $ssd->ssd_id, 'avg_score' => round($ssd->avg_score, 2)]) }}}"
+                           class="btn btn-info">Select</a>
+                        <a href="{{{ action('ComputerController@store',
+                            ['id' => $ssd->ssd_id, 'avg_score' => round($ssd->avg_score, 2)]) }}}"
+                           class="btn-info btn">Add to your Computer</a>
+                    </td>
                 </tr>
             @endforeach
         </table>

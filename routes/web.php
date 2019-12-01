@@ -16,9 +16,9 @@ Route::get('/welcome', function () {
 });
 Route::get('autocomplete', 'AutoCompleteController@liveSearch');
 
-Route::get('/','ComputerController@index');
-Route::get('/show','ComputerController@show');
-Route::get('/hardware','HardwareController@index');
+Route::get('/','HardwareController@index');
+Route::get('/computer/store','ComputerController@store');
+Route::get('/computer/index','ComputerController@index');
 
 Route::get('/hardware/cpu','HardwareController@showCPUAndAvgScoreList');
 Route::get('/hardware/cpu/chart','HardwareController@showScoreChart');

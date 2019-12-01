@@ -110,7 +110,8 @@ class Computer
      */
     public function getFastestSSDOrHDDScore(array $storageList): float
     {
-        $ssdScores = array();
+        return max(array_column($storageList, 'score'));
+        /*$ssdScores = array();
         $hddScores = array();
         foreach ($storageList as $key => $value) {
             $storage = get_object_vars($value);
@@ -125,7 +126,7 @@ class Computer
             return max($ssdScores);
         } else {
             return max($hddScores);
-        }
+        }*/
     }
 
     /**

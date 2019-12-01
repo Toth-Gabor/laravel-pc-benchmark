@@ -22,7 +22,6 @@ class HardwareController extends Controller
         $this->hardwareSrv = new HardwareService();
     }
 
-
     /**
      * Display a listing of the resource.
      *
