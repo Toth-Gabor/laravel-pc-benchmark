@@ -1,58 +1,53 @@
 <?php
 
 
-namespace App\Http\repositories;
+namespace App\Http\services;
 
 
-use App\Computer;
-use App\Http\models\hardwares\Cpu;
-use App\Http\models\hardwares\Gpu;
-use App\Http\models\hardwares\Ram;
-use function Composer\Autoload\includeFile;
+
+use Exception;
 
 class ComputerService
 {
-    private $compRepo;
-
-    /**
-     * ComputerService constructor.
-     */
-    public function __construct()
-    {
-        $this->compRepo = new ComputerRepository();
-    }
-
     /**
      * @param float $cpuScore
      * @param float $gpuScore
      * @param float $ramScore
-     * @param array $storages
+     * @param array $storageList
      * @return array
+     * @throws Exception
      */
-    public function getScores(float $cpuScore, float $gpuScore, float $ramScore, array $storages): array
+    public function getScores(float $cpuScore, float $gpuScore, float $ramScore, array $storageList): array
     {
         $scores = [];
-        $warning = 'Your computer is not complete yet!';
-        $storageScore = $this->getMaxStorageScore($storages);
-        if (empty($cpuScore) || empty($gpuScore) || empty($ramScore) || empty($storageScore)) {
-            $scores['gamer'] = $warning;
-            $scores['work'] = $warning;
-            $scores['desk'] = $warning;
-        } else {
+        $storageScore = $this->getMaxStorageScore($storageList);
+
+        if (!(empty($cpuScore) || empty($gpuScore) || empty($ramScore) || empty($storageScore))) {
             $scores['gamer'] = (($cpuScore * 0.3) + ($gpuScore * 0.5) + ($storageScore * 0.1) + ($ramScore * 0.1));
             $scores['work'] = (($cpuScore * 0.5) + ($gpuScore * 0.1) + ($storageScore * 0.2) + ($ramScore * 0.2));
             $scores['desk'] = (($cpuScore * 0.3) + ($gpuScore * 0.1) + ($storageScore * 0.3) + ($ramScore * 0.3));
+        } else {
+            throw new Exception('Your computer is not complete yet!');
         }
         return $scores;
     }
 
     /**
-     * @param array $storages
+     * @param array $storageList
      * @return float
      */
-    private function getMaxStorageScore(array $storages): float
+    private function getMaxStorageScore(array $storageList): float
     {
-        return max(array_column($storages, 'score'));
+        $tempArr = [];
+        foreach ($storageList as $value){
+            $tempArr[] = $value->getScore();
+        }
+        return max($tempArr);
+    }
+
+    public function isCompleted(array $computer): bool
+    {
+        return !(empty($computer['cpu'] || empty($computer['gpu'] || empty($computer['ram'] || empty($computer['storges'])))));
     }
 
 

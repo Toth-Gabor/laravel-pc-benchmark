@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\repositories\ComputerService;
+use App\Http\services\ComputerService;
 use App\Http\services\HardwareService;
 use Exception;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class ComputerController extends Controller
 {
@@ -14,14 +16,24 @@ class ComputerController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return void
+     * @return Factory|View
+     * @throws Exception
      */
     public function index(Request $request)
     {
+        $compSrv = new ComputerService();
+
         if (!$request->session()->get('computer')) {
             return view('hardwares.index');
         } else {
-            return view('index', ['computer' => $request->session()->get('computer')]);
+            $computer = $request->session()->get('computer');
+            $status = $compSrv->isCompleted($computer);
+            $scores = '';
+            // get scores of hardwares
+            if ($status) {
+                $scores = $this->countScores($request);
+            }
+            return view('index', ['computer' => $computer, 'status' => $status, 'scores' => $scores]);
         }
     }
 
@@ -31,9 +43,31 @@ class ComputerController extends Controller
      * @param Request $request
      * @return void
      */
-    public function create(Request $request)
+    public
+    function remove(Request $request)
     {
-        //$request->session()->put('storages', []);
+        $id = $request->get('id');
+        $type = $request->get('type');
+        $computer = $request->session()->get('storages');
+
+        switch ($type) {
+            case 'CPU':
+                $request->session()->forget('cpu');
+                break;
+            case 'GPU':
+                $request->session()->forget('gpu');
+                break;
+            case 'RAM':
+                $request->session()->forget('ram');
+                break;
+            case 'SSD':
+            case 'HDD':
+                for ($i = 0; $i < sizeof($computer['storages']); $i++) {
+                    if ($computer['storages'][$i]->getId == $id) {
+                        break;
+                    }
+                }
+        }
     }
 
     /**
@@ -55,13 +89,14 @@ class ComputerController extends Controller
             $request->session()->put('computer', $computer);
         }
         $computer = $request->session()->get('computer');
+        $status = $compSrv->isCompleted($computer);
 
+        $scores = '';
         // get scores of hardwares
-        $cpuScore = $computer['cpu']->getScore() ? $computer['cpu']->getScore() : null;
-        $gpuScore = $computer['gpu']->getScore() ? $computer['gpu']->getScore() : null;
-        $ramScore = $computer['ram']->getScore() ? $computer['ram']->getScore() : null;
-        $storages = sizeof($computer['storages']) > 0 ? $computer['storages']: null;
-        $scores = $compSrv->getScores($cpuScore, $gpuScore, $ramScore, $storages);
+        if ($status) {
+            $scores = $this->countScores($request);
+        }
+
 
         $id = (request('id')) ? request('id') : 2;
         $hardware = $hwRepo->getHardwareById($id);
@@ -86,9 +121,10 @@ class ComputerController extends Controller
                 break;
             case 'HDD':
             case 'SSD':
-                if (sizeof($computer['storages']) < 5){
+                if (sizeof($computer['storages']) < 5) {
                     array_push($computer['storages'], $hardware);
                     $request->session()->put('computer', $computer);
+
                     break;
                 } else {
                     break;
@@ -97,20 +133,25 @@ class ComputerController extends Controller
             default:
                 throw new Exception('The hardware type is incorrect!');
         }
-        return view('index', ['computer' => $request->session()->get('computer'),
-                                     'scores' => $scores]);
+        return view('index', ['computer' => $computer, 'status' => $status, 'scores' => $scores]);
     }
 
     /**
      * Display the specified resource.
      *
      * @param Request $request
-     * @return Response
+     * @return array
      * @throws Exception
      */
-    public function show(Request $request)
+    private function countScores(Request $request): array
     {
-
+        $compSrv = new ComputerService();
+        $computer = $request->session()->get('computer');
+        $cpuScore = $computer['cpu']->getScore();
+        $gpuScore = $computer['gpu']->getScore();
+        $ramScore = $computer['ram']->getScore();
+        $storageList = $computer['storages'];
+        return $compSrv->getScores($cpuScore, $gpuScore, $ramScore, $storageList);
     }
 
     /**
