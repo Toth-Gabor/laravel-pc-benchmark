@@ -24,7 +24,7 @@
                     <div class="row ">
                         <p>{{{ $storage->getPartType() }}}</p>
                         <div class="col">
-                            <a href="{{{ action('ComputerController@store',
+                            <a href="{{{ action('ComputerController@remove',
                             ['id' => $storage->getId(), 'type' => $storage->getPartType()]) }}}" class="btn-block ">Remove</a>
                             <p>{{{ 'Id: ' . $storage->getId() }}}</p>
                             <p>{{{ 'Brand: ' . $storage->getBrand() }}}</p>
@@ -39,7 +39,7 @@
                 <div class="row ">
                     <p>{{{ $part->getPartType() }}}</p>
                     <div class="col">
-                        <a href="{{{ action('ComputerController@store',
+                        <a href="{{{ action('ComputerController@remove',
                             ['id' => $part->getId(), 'type' => $part->getPartType()]) }}}" class="btn-block ">Remove</a>
                         <p>{{{ 'Id: ' . $part->getId() }}}</p>
                         <p>{{{ 'Brand: ' . $part->getBrand() }}}</p>

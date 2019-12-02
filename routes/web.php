@@ -19,6 +19,7 @@ Route::get('autocomplete', 'AutoCompleteController@liveSearch');
 Route::get('/','HardwareController@index');
 Route::get('/computer/store','ComputerController@store');
 Route::get('/computer/index','ComputerController@index');
+Route::get('/computer/remove','ComputerController@remove');
 
 Route::get('/hardware/cpu','HardwareController@showCPUAndAvgScoreList');
 Route::get('/hardware/cpu/chart','HardwareController@showScoreChart');

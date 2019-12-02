@@ -22,8 +22,7 @@ class ComputerController extends Controller
     public function index(Request $request)
     {
         $compSrv = new ComputerService();
-
-        if (!$request->session()->get('computer')) {
+        if (empty($computer = $request->session()->get('computer'))) {
             return view('hardwares.index');
         } else {
             $computer = $request->session()->get('computer');
@@ -48,26 +47,35 @@ class ComputerController extends Controller
     {
         $id = $request->get('id');
         $type = $request->get('type');
-        $computer = $request->session()->get('storages');
+        $computer = session()->get('computer');
 
         switch ($type) {
             case 'CPU':
-                $request->session()->forget('cpu');
+                $computer['cpu'] = null;
+                session()->put('computer', $computer);
                 break;
             case 'GPU':
-                $request->session()->forget('gpu');
+                $computer['gpu'] = null;
+                session()->put('computer', $computer);
                 break;
             case 'RAM':
-                $request->session()->forget('ram');
+                $computer['ram'] = null;
+                session()->put('computer', $computer);
                 break;
             case 'SSD':
             case 'HDD':
+                $tempArr = [];
+
                 for ($i = 0; $i < sizeof($computer['storages']); $i++) {
-                    if ($computer['storages'][$i]->getId == $id) {
-                        break;
+                    if ($computer['storages'][$i]->getId() != $id) {
+                        $tempArr[] = $computer['storages'][$i];
                     }
                 }
+                $computer['storages'] = $tempArr;
+                session()->put('computer', $computer);
+                break;
         }
+        return redirect('/computer/index');
     }
 
     /**
@@ -89,16 +97,12 @@ class ComputerController extends Controller
             $request->session()->put('computer', $computer);
         }
         $computer = $request->session()->get('computer');
-        $status = $compSrv->isCompleted($computer);
 
         $scores = '';
-        // get scores of hardwares
-        if ($status) {
-            $scores = $this->countScores($request);
-        }
 
 
-        $id = (request('id')) ? request('id') : 2;
+
+        $id = (request('id'));
         $hardware = $hwRepo->getHardwareById($id);
         $avg_score = request('avg_score');
         $hardware->setScore($avg_score);
@@ -133,6 +137,12 @@ class ComputerController extends Controller
             default:
                 throw new Exception('The hardware type is incorrect!');
         }
+        // get scores of hardwares
+        $status = $compSrv->isCompleted($computer);
+        if ($status) {
+            $scores = $this->countScores($request);
+        }
+
         return view('index', ['computer' => $computer, 'status' => $status, 'scores' => $scores]);
     }
 

@@ -81,55 +81,6 @@ class Computer
     }
 
     /**
-     * @return float
-     */
-    public function getGamerScore(): float
-    {
-        return (($this->cpuScore * 0.3) + ($this->gpuScore * 0.5) + ($this->storageScore * 0.1) + ($this->ramScore * 0.1));
-    }
-
-    /**
-     * @return float
-     */
-    public function getWorkstationScore(): float
-    {
-        return (($this->cpuScore * 0.5) + ($this->gpuScore * 0.1) + ($this->storageScore * 0.2) + ($this->ramScore * 0.2));
-    }
-
-    /**
-     * @return float
-     */
-    public function getDesktopScore(): float
-    {
-        return (($this->cpuScore * 0.3) + ($this->gpuScore * 0.1) + ($this->storageScore * 0.3) + ($this->ramScore * 0.3));
-    }
-
-    /**
-     * @param array $storageList
-     * @return float
-     */
-    public function getFastestSSDOrHDDScore(array $storageList): float
-    {
-        return max(array_column($storageList, 'score'));
-        /*$ssdScores = array();
-        $hddScores = array();
-        foreach ($storageList as $key => $value) {
-            $storage = get_object_vars($value);
-
-            if ($storage['part'] == 'SSD') {
-                array_push($ssdScores, $storage['score']);
-            } else {
-                array_push($hddScores, $storage['score']);
-            }
-        }
-        if (!empty($ssdScores)) {
-            return max($ssdScores);
-        } else {
-            return max($hddScores);
-        }*/
-    }
-
-    /**
      * @return int
      */
     public function getId(): int

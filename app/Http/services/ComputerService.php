@@ -47,7 +47,18 @@ class ComputerService
 
     public function isCompleted(array $computer): bool
     {
-        return !(empty($computer['cpu'] || empty($computer['gpu'] || empty($computer['ram'] || empty($computer['storges'])))));
+        $status = true;
+        if (empty($computer['cpu'])){
+            $status = false;
+        } elseif (empty($computer['gpu'])){
+            $status = false;
+        } elseif (empty($computer['ram'])){
+            $status = false;
+        } elseif (empty($computer['storages'])){
+            $status = false;
+        }
+        return $status;
+        //return !(empty($computer['cpu']) && empty($computer['gpu']) && empty($computer['ram']) && empty($computer['storges'])) ? true: false;
     }
 
 
