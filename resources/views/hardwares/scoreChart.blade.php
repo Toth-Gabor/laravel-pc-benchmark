@@ -24,7 +24,7 @@
                     includeZero: true
                 },
                 data: [{
-                    type: "column",
+                    type: "bar",
                     dataPoints: scoreList
                 }]
             });

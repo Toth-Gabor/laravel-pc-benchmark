@@ -13,14 +13,15 @@
         </div>
     </div>
 </nav>
+
 <script type="text/javascript">
     let route = "{{ url('autocomplete') }}";
     $('#search').typeahead({
-        source:  function (term, process) {
-            return $.get(route, { term: term }, function (data) {
+        minLength: 3,
+        source: function (term, process) {
+            return $.get(route, {term: term}, function (data) {
                 return process(data);
             });
-        }
+        },
     });
-
 </script>

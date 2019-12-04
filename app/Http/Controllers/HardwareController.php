@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Http\services\HardwareService;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 
@@ -30,11 +29,12 @@ class HardwareController extends Controller
     public function index()
     {
         $test = 'From hardware';
-
-
         return view('hardwares.index', ['test' => $test]);
     }
 
+    /**
+     * @return Factory|View
+     */
     public function showCPUAndAvgScoreList()
     {
         $cpuAndAvgScoreList = $this->hardwareSrv->getAllCpuAndAvgScore();
@@ -42,7 +42,9 @@ class HardwareController extends Controller
         return view('hardwares.cpu', ['cpuAndAvgScoreList' => $cpuAndAvgScoreList]);
     }
 
-
+    /**
+     * @return Factory|View
+     */
     public function showGpuAndAvgScoreList()
     {
         $gpuAndAvgScoreList = $this->hardwareSrv->getAllGpuAndAvgScore();
@@ -50,6 +52,9 @@ class HardwareController extends Controller
         return view('hardwares.gpu', ['gpuAndAvgScoreList' => $gpuAndAvgScoreList]);
     }
 
+    /**
+     * @return Factory|View
+     */
     public function showRAMAndAvgScoreList()
     {
         $ramAndAvgScoreList = $this->hardwareSrv->getAllRamAndAvgScore();
@@ -57,6 +62,9 @@ class HardwareController extends Controller
         return view('hardwares.ram', ['ramAndAvgScoreList' => $ramAndAvgScoreList]);
     }
 
+    /**
+     * @return Factory|View
+     */
     public function showSSDAndAvgScoreList()
     {
         $ssdAndAvgScoreList = $this->hardwareSrv->getAllSSDAndAvgScore();
@@ -64,6 +72,9 @@ class HardwareController extends Controller
         return view('hardwares.ssd', ['ssdAndAvgScoreList' => $ssdAndAvgScoreList]);
     }
 
+    /**
+     * @return Factory|View
+     */
     public function showHDDAndAvgScoreList()
     {
         $hddAndAvgScoreList = $this->hardwareSrv->getAllHDDAndAvgScore();
@@ -71,14 +82,9 @@ class HardwareController extends Controller
         return view('hardwares.hdd', ['hddAndAvgScoreList' => $hddAndAvgScoreList]);
     }
 
-    public function showCPUList()
-    {
-        $cpuList = $this->hardwareSrv;
-        return view('index', ['hddAndAvgScoreList' => $hddAndAvgScoreList]);
-    }
-
     /**
      * @return Factory|View
+     * @throws \Exception
      */
     public function showScoreChart()
     {
@@ -119,72 +125,5 @@ class HardwareController extends Controller
         }
         return view('hardwares.scoreChart', ['scoreList' => $scoreList, 'hardware' => $hardware,
             'computerFittedWith' => $computerFittedWith, 'avg_score' => $avg_score]);
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

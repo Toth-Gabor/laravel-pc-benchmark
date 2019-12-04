@@ -11,6 +11,10 @@ class ComputerRepository
     private $computer;
     private $storages;
 
+    /**
+     * @param int $id
+     * @return array
+     */
     public function getComputerById(int $id): array
     {
         $this->computer = DB::table('computers')
@@ -21,6 +25,10 @@ class ComputerRepository
 
     }
 
+    /**
+     * @param int $compId
+     * @return array
+     */
     private function getStoragesByCompId(int $compId): array
     {
         $this->storages = DB::table('storages')

@@ -11,7 +11,7 @@ use App\Http\models\hardwares\HDD;
 use App\Http\models\hardwares\Ram;
 use App\Http\models\hardwares\SSD;
 use App\Http\repositories\HardwaresRepository;
-use mysql_xdevapi\Exception;
+use Exception;
 
 class HardwareService
 {
@@ -68,6 +68,7 @@ class HardwareService
     /**
      * @param int $id
      * @return array
+     * @throws Exception
      */
     public function getHardwareListById(int $id): array
     {
@@ -87,10 +88,10 @@ class HardwareService
         }
     }
 
-
     /**
      * @param int $id
      * @return Cpu|Gpu|Ram|SSD|HDD
+     * @throws Exception
      */
     public function getHardwareById(int $id): Hardware
     {
@@ -110,7 +111,8 @@ class HardwareService
                 return new SSD($id, $hwType, $brand, $model, $score);
             case 'HDD':
                 return new HDD($id, $hwType, $brand, $model, $score);
-
+            default:
+                throw new Exception("There is'nt any hardware with this id!");
         }
     }
 }

@@ -38,6 +38,9 @@ class GenerateComputersRepository
      */
     private $randomStorageList;
 
+    /**
+     * @var
+     */
     private $onePart;
 
     /**
@@ -87,6 +90,9 @@ class GenerateComputersRepository
         return $this->onePart;
     }
 
+    /**
+     * @param array $genCompList
+     */
     public function insertGeneratedComputers(array $genCompList)
     {
         foreach ($genCompList as $genComp) {

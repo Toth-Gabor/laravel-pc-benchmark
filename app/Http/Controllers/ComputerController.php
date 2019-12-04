@@ -9,11 +9,12 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
+use phpDocumentor\Reflection\Types\Integer;
 
 class ComputerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the computer.
      *
      * @param Request $request
      * @return Factory|View
@@ -37,7 +38,7 @@ class ComputerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Remove hardware from computer
      *
      * @param Request $request
      * @return void
@@ -45,7 +46,7 @@ class ComputerController extends Controller
     public
     function remove(Request $request)
     {
-        $id = $request->get('id');
+        $id = (integer)$request->get('id');
         $type = $request->get('type');
         $computer = session()->get('computer');
 
@@ -65,7 +66,6 @@ class ComputerController extends Controller
             case 'SSD':
             case 'HDD':
                 $tempArr = [];
-
                 for ($i = 0; $i < sizeof($computer['storages']); $i++) {
                     if ($computer['storages'][$i]->getId() != $id) {
                         $tempArr[] = $computer['storages'][$i];
@@ -79,8 +79,7 @@ class ComputerController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * Add hardware into computer
      * @param Request $request
      * @return void
      * @throws Exception
@@ -96,12 +95,9 @@ class ComputerController extends Controller
             $computer['storages'] = [];
             $request->session()->put('computer', $computer);
         }
+
         $computer = $request->session()->get('computer');
-
         $scores = '';
-
-
-
         $id = (request('id'));
         $hardware = $hwRepo->getHardwareById($id);
         $avg_score = request('avg_score');
@@ -164,37 +160,4 @@ class ComputerController extends Controller
         return $compSrv->getScores($cpuScore, $gpuScore, $ramScore, $storageList);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

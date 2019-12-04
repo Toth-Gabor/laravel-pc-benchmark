@@ -3,8 +3,6 @@
 
 namespace App\Http\services;
 
-
-
 use Exception;
 
 class ComputerService
@@ -39,27 +37,28 @@ class ComputerService
     private function getMaxStorageScore(array $storageList): float
     {
         $tempArr = [];
-        foreach ($storageList as $value){
+        foreach ($storageList as $value) {
             $tempArr[] = $value->getScore();
         }
         return max($tempArr);
     }
 
+    /**
+     * @param array $computer
+     * @return bool
+     */
     public function isCompleted(array $computer): bool
     {
         $status = true;
-        if (empty($computer['cpu'])){
+        if (empty($computer['cpu'])) {
             $status = false;
-        } elseif (empty($computer['gpu'])){
+        } elseif (empty($computer['gpu'])) {
             $status = false;
-        } elseif (empty($computer['ram'])){
+        } elseif (empty($computer['ram'])) {
             $status = false;
-        } elseif (empty($computer['storages'])){
+        } elseif (empty($computer['storages'])) {
             $status = false;
         }
         return $status;
-        //return !(empty($computer['cpu']) && empty($computer['gpu']) && empty($computer['ram']) && empty($computer['storges'])) ? true: false;
     }
-
-
 }

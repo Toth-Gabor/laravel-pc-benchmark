@@ -6,6 +6,7 @@
 <body>
 
 @include('includes.nav')
+@include('includes.benchmarkNav')
 
 <h1>Computer</h1>
 <div class="container-fluid">

@@ -14,7 +14,7 @@
 Route::get('/welcome', function () {
     return view('welcome');
 });
-Route::get('autocomplete', 'AutoCompleteController@liveSearch');
+Route::get('autocomplete', 'AutoCompleteController@search');
 
 Route::get('/','HardwareController@index');
 Route::get('/computer/store','ComputerController@store');
@@ -22,7 +22,7 @@ Route::get('/computer/index','ComputerController@index');
 Route::get('/computer/remove','ComputerController@remove');
 
 Route::get('/hardware/cpu','HardwareController@showCPUAndAvgScoreList');
-Route::get('/hardware/cpu/chart','HardwareController@showScoreChart');
+Route::get('/hardware/cpu/chart','HardwareController@showScoreChart')->name('show-score-chart');
 
 Route::get('/hardware/gpu','HardwareController@showGPUAndAvgScoreList');
 Route::get('/hardware/gpu/chart','HardwareController@showScoreChart');

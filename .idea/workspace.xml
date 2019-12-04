@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da5d04c5-7851-4b95-8dc0-73aaec770c9d" name="Default Changelist" comment="">
+    <list default="true" id="da5d04c5-7851-4b95-8dc0-73aaec770c9d" name="Default Changelist" comment="Code refactored">
+      <change beforePath="$PROJECT_DIR$/.idea/laravel-pc-benchmark.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-pc-benchmark.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AutoCompleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AutoCompleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ComputerBuilderController.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ComputerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ComputerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/models/Computer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/models/Computer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HardwareController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HardwareController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/models/hardwares/DataStorage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/models/hardwares/DataStorage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/repositories/ComputerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/repositories/ComputerRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/repositories/GenerateComputersRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/repositories/GenerateComputersRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/repositories/HardwaresRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/repositories/HardwaresRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/services/BenchmarkScoreCounter.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/services/ComputerService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/services/ComputerService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/services/HardwareService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/services/HardwareService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/hardwares/scoreChart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/hardwares/scoreChart.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/includes/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/nav.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -93,6 +110,7 @@
       </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="JsBowerSettings">
     <node-interpreter value="project" />
@@ -187,6 +205,15 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/type" />
       <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
     </include_path>
   </component>
   <component name="ProjectId" id="1Tp7TEd1yJlyRxopXgEguYD6rRV" />
@@ -199,7 +226,7 @@
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/hardwares.sql" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="web.server" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -256,6 +283,7 @@
       <workItem from="1574146520020" duration="79328000" />
       <workItem from="1574675049552" duration="30721000" />
       <workItem from="1574758691306" duration="153041000" />
+      <workItem from="1575399440315" duration="3346000" />
     </task>
     <task id="LOCAL-00001" summary="Added BenchmarkScoreCounter class">
       <created>1574604924799</created>
@@ -358,6 +386,7 @@
     <MESSAGE value="Started computer page, add parts to computer" />
     <MESSAGE value="Add hardware to computer working" />
     <MESSAGE value="Show computer gamer,workstation and desktop score" />
-    <option name="LAST_COMMIT_MESSAGE" value="Show computer gamer,workstation and desktop score" />
+    <MESSAGE value="Code refactored" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code refactored" />
   </component>
 </project>

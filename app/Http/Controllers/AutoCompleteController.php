@@ -11,17 +11,21 @@ use Illuminate\Support\Facades\DB;
 
 class AutoCompleteController extends Controller
 {
-
     /**
      * @param Request $request
      * @return JsonResponse
      */
-    Public function liveSearch(Request $request)
+    public function search(Request $request)
     {
         $hwRepo = new HardwaresRepository();
         $term = $request->get('term');
-        $autocompleteData = $hwRepo->search($term);
-        return response()->json($autocompleteData);
+        $data = $hwRepo->search($term);
+        $tempArr = [];
+        foreach ($data as $hardware){
+            $tempArr[] = $hardware->model;
+            //$tempArr[] = '<a href=" '. route('show-score-chart', ['id'=> $hardware->id, 'avg_score' => $hardware->model]). '" class="nav-item nav-link">'. $hardware->model .'</a>';
+        }
+        return response()->json($tempArr);
     }
 
 }

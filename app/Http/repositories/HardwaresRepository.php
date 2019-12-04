@@ -4,8 +4,6 @@
 namespace App\Http\repositories;
 
 
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -163,10 +161,6 @@ class HardwaresRepository
         return $hardware;
     }
 
-    public function getCpuList()
-    {
-
-    }
 
     /**
      * @param string $term
@@ -175,9 +169,7 @@ class HardwaresRepository
     public function search(string $term)
     {
         return DB::table('hardwares')
-            ->where("model", "LIKE", "%$term%")
-            ->orWhere('brand', "LIKE", "%$term%")
-            ->orWhere('part', "LIKE", "%$term%")
+            ->where("model", "ILIKE", "%$term%")
             ->limit(self::LIMIT)
             ->get();
     }
